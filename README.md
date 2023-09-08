@@ -1,4 +1,4 @@
-# devprod
+# Monkey Prod
 Analytical tool for tracking developer's GitHub commit rate.
 
 ---
