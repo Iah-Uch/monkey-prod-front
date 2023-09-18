@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, TextInput, Button, TouchableOpacity, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { VStack, HStack, Text } from "native-base";
+
+
 
 const SignUp = () => {
 
@@ -45,12 +49,21 @@ const SignUp = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
+      <Text style={styles.h4}>Forgor password ?</Text>
 
       <Button style={{
         backgroundColor: "FFFFFF",
         color: "FFFFFF",
 
       }} title="Entrar" onPress={handleLogin} />
+
+      <Text style={styles.h3}>or continue with</Text>
+      <Image
+        style={{
+          marginTop: 25,
+        }}
+        source={require("../../../assets/images/GoogleIcon.png")} />
+
       <StatusBar style="auto" />
     </VStack >
   );
