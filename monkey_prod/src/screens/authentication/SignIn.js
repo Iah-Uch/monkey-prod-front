@@ -72,6 +72,7 @@ const SignIn = () => {
         color: "FFFFFF",
 
       }} title="Entrar" onPress={handleLogin} />
+      {/* onPress={() => navigate("SignUp")} */}
       <StatusBar style="auto" />
     </VStack >
   );
