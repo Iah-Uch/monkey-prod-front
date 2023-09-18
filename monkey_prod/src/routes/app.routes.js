@@ -9,8 +9,9 @@ const {Navigator, Screen} = createDrawerNavigator();
 const AppRoutes = () => {
   return (
     <Navigator>
-      <Screen name="Home" component={Home} />
       <Screen name="SignIn" component={SignIn} />
+
+      <Screen name="Home" component={Home} />
       <Screen name="SignUp" component={SignUp} />
     </Navigator>
   );
