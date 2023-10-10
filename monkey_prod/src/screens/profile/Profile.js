@@ -10,64 +10,36 @@ const Profile = () => {
 
     const { navigate } = useNavigation();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    const handleLogin = () => {
-        // Lógica para autenticar o usuário com o email e senha fornecidos
-        // Aqui você pode fazer uma chamada a uma API ou implementar sua própria lógica de autenticação
-
-        console.log("Email:", email);
-        console.log("Password:", password);
-    };
 
     return (
         <VStack style={styles.container}>
-            <Text style={styles.h1}>Sign in to </Text>
-            <Text style={styles.h2}>Lorem Ipsum is simply</Text>
-            <Text style={styles.h3}>If you already have an account register</Text>
-            <HStack>
-                <Text style={styles.h3}>You can </Text>
-                <TouchableOpacity onPress={() => navigate("SignIn")}>
-                    <Text style={styles.h3green}> Register here !</Text>
-                </TouchableOpacity>
-            </HStack>
 
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                placeholderTextColor="#FFFFFF"
-                value={email}
-                onChangeText={(text) => setEmail(text)}
+            <TouchableOpacity onPress={() => navigate("Home")} style={styles.return}>
+                <Image source={require("../../../assets/images/Vector.png")} />
+            </TouchableOpacity>
+            <Text style={styles.h1}>Profile</Text>
 
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                placeholderTextColor="#FFFFFF"
-                secureTextEntry
-                value={password}
-                onChangeText={(text) => setPassword(text)}
-            />
-            <Text style={styles.h4}>Forgor password ?</Text>
+            <VStack style={styles.profileAlign}>
+                <Image source={require("../../../assets/images/profilePhoto.png")} />
 
-            <Button style={{
-                backgroundColor: "FFFFFF",
-                color: "FFFFFF",
+                <HStack style={styles.nameEdit}>
+                    <Text style={styles.h1}>Douglas Doce</Text>
 
-            }} title="Entrar" onPress={handleLogin} />
-            {/* onPress={() => navigate("SignUp")} */}
-            <Text style={styles.h3Center}>or continue with</Text>
-            <Center>
-                <Image
-                    style={{
-                        marginTop: 25,
-                    }}
-                    source={require("../../../assets/images/GoogleIcon.png")} />
-            </Center>
+                    <TouchableOpacity>
+                        <Image
+                            style={{
+                                marginTop: 25,
+                            }}
+                            source={require("../../../assets/images/Pensil.png")} />
+                    </TouchableOpacity>
+                </HStack >
 
+            </VStack >
 
-            <StatusBar style="auto" />
+            <TouchableOpacity onPress={() => navigate("SignUp")}>
+                <Text style={styles.exit}>Log Out</Text>
+            </TouchableOpacity>
+
         </VStack >
     );
 };
@@ -79,67 +51,39 @@ const styles = StyleSheet.create({
         backgroundColor: "#0B1416",
         padding: 16,
     },
-
     h1: {
         fontSize: 32,
         fontWeight: "bold",
         color: "#FFFFFF",
-        paddingTop: 20,
-        // fontFamily: "Poppins",
+        paddingTop: 40,
     },
-    h2: {
+    exit: {
         fontSize: 24,
-        fontWeight: "medium",
-        color: "#FFFFFF",
-        paddingTop: 20,
-        // fontFamily: "Poppins",
+        fontWeight: "bold",
+        color: "#7E1515",
+        paddingTop: 40,
+        marginTop: 200,
     },
-    h3: {
-        fontSize: 16,
-        fontWeight: "medium",
-        color: "#FFFFFF",
-        paddingTop: 20,
-        // fontFamily: "Poppins",
+    return: {
+        paddingTop: 15,
+        paddingBottom: 15,
+        borderBottomWidth: 1.5,
+        borderBlockColor: "#1A282D",
     },
-    h4: {
-        fontSize: 14,
-        fontWeight: "light",
-        color: "#B0B0B0",
-        textAlign: "right",
-        marginBottom: 20,
-        // fontFamily: "Poppins",
+    profileAlign: {
+        justifyContent: "center",
+        alignItems: "center",
+
     },
-    h3green: {
-        fontSize: 16,
-        fontWeight: "medium",
-        color: "#23B198",
-        paddingTop: 20,
-        // fontFamily: "Poppins",
-        marginBottom: 20,
-    },
-    h3Center: {
-        fontSize: 16,
-        fontWeight: "medium",
-        color: "#B5B5B5",
-        paddingTop: 20,
-        textAlign: "center",
-        // fontFamily: "Poppins",
+    nameEdit: {
+        width: '75%',
+        justifyContent: "space-evenly",
+        alignItems: "center",
+        paddingBottom: 15,
+        borderBottomWidth: 1.5,
+        borderBlockColor: "#FFFFFF",
     },
 
-    input: {
-        backgroundColor: "#1A282D",
-        width: "100%",
-        height: 62,
-        borderRadius: 10,
-        marginBottom: 12,
-        paddingHorizontal: 20,
-    },
-
-    entrar: {
-        backgroundColor: "#23B198",
-        width: "100%",
-        height: 62,
-    },
 });
 
 

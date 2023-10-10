@@ -1,8 +1,8 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { VStack, HStack, Text, Center } from "native-base";
+import { VStack, HStack, Text, Center, } from "native-base";
 
 
 const Home = () => {
@@ -10,80 +10,83 @@ const Home = () => {
   const { navigate } = useNavigation();
 
   return (
-    <VStack style={styles.container}>
 
-      <HStack style={styles.navBar}>
-        <TouchableOpacity style={styles.report}>
-          <Text style={styles.reportText}>\RepoName</Text>
-        </TouchableOpacity>
+    <ScrollView>
+      <StatusBar style="auto" />
 
-        <TouchableOpacity onPress={() => navigate("Profile")}>
-          <Image
-            style={{
-              alignContent: 'rigth',
-            }}
-            source={require("../../../assets/images/ProfileImage.png")} />
-        </TouchableOpacity>
+      <VStack style={styles.container}>
 
-      </HStack>
+        <HStack style={styles.navBar}>
+          <TouchableOpacity style={styles.report}>
+            <Text style={styles.reportText}>\RepoName</Text>
+          </TouchableOpacity>
 
-      <Text style={styles.h1}>Commit</Text>
-
-
-      <HStack style={styles.commit}>
-        <VStack>
-          <Center>
-            <Text style={styles.h2}>Count</Text>
-            <Text style={styles.number}>32</Text>
-          </Center>
-        </VStack>
-
-        <VStack>
-          <Center>
-            <Text style={styles.h2}>Average </Text>
-            <Text style={styles.number}>28</Text>
-          </Center>
-        </VStack>
-      </HStack>
-
-      <VStack>
-        <HStack style={styles.commit}>
-          <Text style={styles.h3}>Commit Goals</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigate("Profile")}>
             <Image
               style={{
                 alignContent: 'rigth',
               }}
-              source={require("../../../assets/images/AddCommit.png")} />
+              source={require("../../../assets/images/ProfileImage.png")} />
           </TouchableOpacity>
+
         </HStack>
 
+        <Text style={styles.h1}>Commit</Text>
 
 
-      </VStack>
+        <HStack style={styles.commit}>
+          <VStack>
+            <Center>
+              <Text style={styles.h2}>Count</Text>
+              <Text style={styles.number}>32</Text>
+            </Center>
+          </VStack>
 
+          <VStack>
+            <Center>
+              <Text style={styles.h2}>Average </Text>
+              <Text style={styles.number}>28</Text>
+            </Center>
+          </VStack>
+        </HStack>
 
-
-      {/*
-      <StatusBar style="auto" />
-      <Text>Home</Text>
-
-      <View>
-        <TouchableOpacity
-          onPress={() => navigate("SignIn")}
-          style={styles.Entrar}
-        >
-          <Text
+        <VStack style={styles.commit}>
+          <HStack
             style={{
-              color: "#000000",
-              fontWeight: "bold",
-              fontSize: 28,
-            }}
-          >Entrar</Text>
-        </TouchableOpacity>
-      </View> */}
+              marginTop: 5,
+              justifyContent: "space-evenly",
+            }}>
+            <Text style={styles.h3}>Commit Goals</Text>
+            <TouchableOpacity>
+              <Image
 
-    </VStack>
+                source={require("../../../assets/images/AddCommit.png")} />
+            </TouchableOpacity>
+          </HStack>
+
+          <VStack style={styles.commitElements}>
+            <HStack style={styles.goal}>
+              <Image source={require("../../../assets/images/alpha-x-circle-outline.png")} />
+              <Text style={styles.h3}>  GOAL 1 - X Objective  </Text>
+              <Text style={styles.h3}>  32/35  </Text>
+            </HStack>
+            <HStack style={styles.goalVerify}>
+              <Image source={require("../../../assets/images/check-circle-outline.png")} />
+              <Text style={styles.h3}>    GOAL 2 - Y Objective  </Text>
+              <Text style={styles.h3}>  32/35  </Text>
+            </HStack>
+            <HStack style={styles.goal}>
+              <Image source={require("../../../assets/images/alpha-x-circle-outline.png")} />
+              <Text style={styles.h3}>    GOAL 3 - Z Objective  </Text>
+              <Text style={styles.h3}>  32/35  </Text>
+            </HStack>
+          </VStack>
+        </VStack>
+
+        <Image source={require("../../../assets/images/distributed.png")} />
+      </VStack>
+    </ScrollView>
+
   );
 };
 
@@ -120,7 +123,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     paddingTop: 40,
     textAlign: "center",
-    // fontFamily: "Poppins",
   },
   h2: {
     fontSize: 24,
@@ -128,13 +130,11 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     paddingTop: 20,
     paddingBottom: 20,
-  // fontFamily: "Poppins",
   },
   h3: {
     fontSize: 18,
     color: "#FFFFFF",
 
-    // fontFamily: "Poppins",
   },
   number: {
     fontSize: 30,
@@ -142,12 +142,39 @@ const styles = StyleSheet.create({
     color: "#57FFEB",
     paddingTop: 10,
     paddingBottom: 10,
-    // fontFamily: "Poppins",
   },
   commit: {
     justifyContent: "space-evenly",
     backgroundColor: "#1A282D",
     borderRadius: 10,
+    padding: 10,
+    marginTop: 20,
+  },
+  commitElements: {
+    justifyContent: "space-evenly",
+    backgroundColor: "#1A282D",
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 10,
+  },
+  goal: {
+    justifyContent: "space-evenly",
+    backgroundColor: "#4F4F4F",
+    borderRadius: 5,
+    padding: 10,
+    marginTop: 10,
+  },
+  goalVerify: {
+    justifyContent: "space-evenly",
+    backgroundColor: "#23B198",
+    borderRadius: 5,
+    padding: 10,
+    marginTop: 10,
+  },
+  imageDistributed: {
+    justifyContent: "center",
+    width: 100,
+    height: 100,
     padding: 10,
     marginTop: 10,
   },
