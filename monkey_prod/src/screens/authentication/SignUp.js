@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TextInput, Button, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, HStack, Text, Center } from "native-base";
@@ -25,7 +24,6 @@ const SignUp = () => {
 
     <VStack style={styles.container}>
 
-      <StatusBar style="auto" />
 
       <Text style={styles.h1}>Sign in to </Text>
       <Text style={styles.h2}>Lorem Ipsum is simply</Text>
@@ -63,11 +61,16 @@ const SignUp = () => {
       {/* onPress={() => navigate("SignUp")} */}
       <Text style={styles.h3Center}>or continue with</Text>
       <Center>
+
+        <TouchableOpacity onPress={() => navigate("Home")}>
+
         <Image
           style={{
             marginTop: 25,
           }}
           source={require("../../../assets/images/GoogleIcon.png")} />
+        </TouchableOpacity>
+
       </Center>
 
 

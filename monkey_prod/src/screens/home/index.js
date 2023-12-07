@@ -1,5 +1,4 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, HStack, Text, Center, } from "native-base";
@@ -12,8 +11,6 @@ const Home = () => {
   return (
 
     <ScrollView>
-      <StatusBar style="auto" />
-
       <VStack style={styles.container}>
 
         <HStack style={styles.navBar}>

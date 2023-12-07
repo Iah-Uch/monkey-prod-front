@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TextInput, Button, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, HStack, Text, Center } from "native-base";
@@ -57,9 +56,26 @@ const Profile = () => {
     return (
         <VStack style={styles.container}>
 
-            <TouchableOpacity onPress={() => navigate("Home")} style={styles.return}>
+            <HStack style={styles.navigateHeader}>
+                <TouchableOpacity onPress={() => navigate("Home")} style={styles.return}>
                 <Image source={require("../../../assets/images/Vector.png")} />
-            </TouchableOpacity>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => navigate("Settings")}>
+                    <Image
+                        style={{
+                            width: 30,
+                            height: 30,
+                            alignContent: 'flex-end',
+                        }}
+                        source={require("../../../assets/images/white-gear-icon-png.jpg")} />
+                </TouchableOpacity>
+            </HStack >
+
+
+
+
+
             <Text style={styles.h1}>Profile</Text>
 
             <VStack style={styles.profileAlign}>
@@ -109,7 +125,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         color: "#7E1515",
-        paddingTop: 40,
         marginTop: 150,
     },
     return: {
@@ -130,6 +145,22 @@ const styles = StyleSheet.create({
         paddingBottom: 15,
         borderBottomWidth: 1.5,
         borderBlockColor: "#FFFFFF",
+    },
+    navigateHeader: {
+        width: '100%',
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingBottom: 15,
+        borderBottomWidth: 1.5,
+        borderBlockColor: "#1A282D",
+    },
+    bottonNav: {
+        marginTop: 100,
+        height: 100,
+        width: '100%',
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingBottom: 15,
     },
     foto: {
         width: 150,

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TextInput, Button, TouchableOpacity, ScrollView, Image } from "react-native";
 import { VStack, HStack, Text, Center } from "native-base";
 import { useNavigation } from "@react-navigation/native";
@@ -27,7 +26,6 @@ const SignIn = () => {
   return (
 
     <ScrollView style={styles.container}>
-      <StatusBar style="auto" />
 
       <VStack >
 
@@ -81,12 +79,19 @@ const SignIn = () => {
 
         <Center>
           <Text style={styles.h3Center}>or continue with</Text>
+
+          <TouchableOpacity onPress={() => navigate("Home")}>
+
           <Image
             style={{
               marginTop: 30,
               marginBottom: 50,
             }}
             source={require("../../../assets/images/GoogleIcon.png")} />
+
+          </TouchableOpacity>
+
+
         </Center>
       </VStack >
 
