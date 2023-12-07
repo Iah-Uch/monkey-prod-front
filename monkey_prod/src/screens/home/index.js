@@ -24,7 +24,7 @@ const Home = () => {
           <TouchableOpacity onPress={() => navigate("Profile")}>
             <Image
               style={{
-                alignContent: 'rigth',
+                alignContent: 'flex-end',
               }}
               source={require("../../../assets/images/ProfileImage.png")} />
           </TouchableOpacity>

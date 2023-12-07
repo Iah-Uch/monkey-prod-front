@@ -1,14 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, TextInput, Button, TouchableOpacity, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, HStack, Text, Center } from "native-base";
+import * as ImagePicker from 'expo-image-picker';
+
 
 
 
 const Profile = () => {
 
     const { navigate } = useNavigation();
+
+    const [foto, setFoto] = useState(null);
+
+
+    useEffect(() => {
+        // Solicitar permissão para acessar a câmera e a galeria de fotos
+        (async () => {
+            const { status } = await ImagePicker.requestCameraPermissionsAsync();
+            if (status !== 'granted') {
+                alert('Desculpe, precisamos de permissão para acessar a câmera e a galeria de fotos.');
+            }
+        })();
+
+    }, []);
+
+
+    const handleEscolherFoto = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.cancelled) {
+            setFoto(result.uri);
+        }
+    };
+
+    const handleTirarFoto = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.cancelled) {
+            setFoto(result.uri);
+        }
+    };
 
 
     return (
@@ -20,7 +63,12 @@ const Profile = () => {
             <Text style={styles.h1}>Profile</Text>
 
             <VStack style={styles.profileAlign}>
-                <Image source={require("../../../assets/images/profilePhoto.png")} />
+
+                <TouchableOpacity onPress={handleTirarFoto} style={styles.foto}>
+
+                    {foto && <Image source={{ uri: foto }} style={styles.fotoProfile} />}
+                </TouchableOpacity>
+
 
                 <HStack style={styles.nameEdit}>
                     <Text style={styles.h1}>Douglas Doce</Text>
@@ -62,7 +110,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         color: "#7E1515",
         paddingTop: 40,
-        marginTop: 200,
+        marginTop: 150,
     },
     return: {
         paddingTop: 15,
@@ -78,6 +126,26 @@ const styles = StyleSheet.create({
     nameEdit: {
         width: '75%',
         justifyContent: "space-evenly",
+        alignItems: "center",
+        paddingBottom: 15,
+        borderBottomWidth: 1.5,
+        borderBlockColor: "#FFFFFF",
+    },
+    foto: {
+        width: 150,
+        height: 150,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 150,
+        alignItems: "center",
+        paddingBottom: 15,
+        borderBottomWidth: 1.5,
+        borderBlockColor: "#FFFFFF",
+    },
+    fotoProfile: {
+        width: 150,
+        height: 150,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 150,
         alignItems: "center",
         paddingBottom: 15,
         borderBottomWidth: 1.5,

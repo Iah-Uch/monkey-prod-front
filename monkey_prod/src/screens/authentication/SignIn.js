@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, TextInput, Button, TouchableOpacity } from "react-native";
-import { VStack, HStack, Text } from "native-base";
+import { StyleSheet, View, TextInput, Button, TouchableOpacity, ScrollView, Image } from "react-native";
+import { VStack, HStack, Text, Center } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -25,56 +25,73 @@ const SignIn = () => {
   };
 
   return (
-    <VStack style={styles.container}>
-      <Text style={styles.h1}>Sign in up</Text>
-      <Text style={styles.h2}>Lorem Ipsum is simply</Text>
-      <Text style={styles.h3}>If you already have an account register</Text>
-      <HStack>
-        <Text style={styles.h3}>You can </Text>
-        <TouchableOpacity onPress={() => navigate("SignUp")}>
-          <Text style={styles.h3green}> Login here !</Text>
-        </TouchableOpacity>
-      </HStack>
 
-      <TextInput
-        style={styles.input}
-        placeholder="User name"
-        placeholderTextColor="#FFFFFF"
-        value={userName}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#FFFFFF"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#FFFFFF"
-        secureTextEntry
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        placeholderTextColor="#FFFFFF"
-        secureTextEntry
-        value={confirmPassword}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <Button style={{
-        backgroundColor: "FFFFFF",
-        color: "FFFFFF",
-
-      }} title="Entrar" onPress={handleLogin} />
-      {/* onPress={() => navigate("SignUp")} */}
+    <ScrollView style={styles.container}>
       <StatusBar style="auto" />
-    </VStack >
+
+      <VStack >
+
+        <Text style={styles.h1}>Sign in up</Text>
+        <Text style={styles.h2}>Lorem Ipsum is simply</Text>
+        <Text style={styles.h3}>If you already have an account register</Text>
+        <HStack>
+          <Text style={styles.h3}>You can </Text>
+          <TouchableOpacity onPress={() => navigate("SignUp")}>
+            <Text style={styles.h3green}> Login here !</Text>
+          </TouchableOpacity>
+        </HStack>
+
+        <TextInput
+          style={styles.input}
+          placeholder="User name"
+          placeholderTextColor="#FFFFFF"
+          value={userName}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor="#FFFFFF"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#FFFFFF"
+          secureTextEntry
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          placeholderTextColor="#FFFFFF"
+          secureTextEntry
+          value={confirmPassword}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <Button style={{
+          backgroundColor: "FFFFFF",
+          color: "FFFFFF",
+
+        }} title="Entrar" onPress={handleLogin} />
+        {/* onPress={() => navigate("SignUp")} */}
+
+        <Center>
+          <Text style={styles.h3Center}>or continue with</Text>
+          <Image
+            style={{
+              marginTop: 30,
+              marginBottom: 50,
+            }}
+            source={require("../../../assets/images/GoogleIcon.png")} />
+        </Center>
+      </VStack >
+
+    </ScrollView>
+
   );
 };
 
@@ -115,7 +132,14 @@ const styles = StyleSheet.create({
     // fontFamily: "Poppins",
     marginBottom: 20,
   },
-
+  h3Center: {
+    fontSize: 16,
+    fontWeight: "medium",
+    color: "#B5B5B5",
+    paddingTop: 20,
+    textAlign: "center",
+    // fontFamily: "Poppins",
+  },
   input: {
     backgroundColor: "#1A282D",
     width: "100%",

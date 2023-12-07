@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, TextInput, Button, TouchableOpacity, Image } from "react-native";
+import { StyleSheet, View, TextInput, Button, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, HStack, Text, Center } from "native-base";
 
@@ -22,7 +22,11 @@ const SignUp = () => {
   };
 
   return (
+
     <VStack style={styles.container}>
+
+      <StatusBar style="auto" />
+
       <Text style={styles.h1}>Sign in to </Text>
       <Text style={styles.h2}>Lorem Ipsum is simply</Text>
       <Text style={styles.h3}>If you already have an account register</Text>
@@ -60,14 +64,13 @@ const SignUp = () => {
       <Text style={styles.h3Center}>or continue with</Text>
       <Center>
         <Image
-        style={{
-          marginTop: 25,
-        }}
-        source={require("../../../assets/images/GoogleIcon.png")} />
+          style={{
+            marginTop: 25,
+          }}
+          source={require("../../../assets/images/GoogleIcon.png")} />
       </Center>
 
 
-      <StatusBar style="auto" />
     </VStack >
   );
 };
