@@ -6,9 +6,8 @@ import {
   Button,
   TouchableOpacity,
   ScrollView,
-  Image,
 } from "react-native";
-import { VStack, HStack, Text, Center } from "native-base";
+import { VStack, HStack, Text, Center, Image } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
@@ -56,9 +55,9 @@ const SignIn = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <VStack>
+      <VStack mt={5}>
         <Text style={styles.h1}>Sign in to</Text>
-        <Text style={styles.h2}>Lorem Ipsum is simply</Text>
+        <Image alt={"monkeyprod"} source={require("../../../assets/images/monkey-prod.png")} w={80} my={3}/>
         <Text style={styles.h3}>If you already have an account register</Text>
         <HStack>
           <Text style={styles.h3}>You can </Text>
@@ -118,6 +117,7 @@ const SignIn = () => {
                 marginTop: 30,
                 marginBottom: 50,
               }}
+              alt="goggle"
               source={require("../../../assets/images/GoogleIcon.png")}
             />
           </TouchableOpacity>

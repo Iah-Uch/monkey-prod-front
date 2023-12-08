@@ -1,33 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, HStack, Text, Center, } from "native-base";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Home = () => {
 
   const { navigate } = useNavigation();
+  const [commits, setCommits] = useState([]);
 
+  const commitView = async () => {
+    const data = await AsyncStorage.getItem('commits');
+     return data != null ? setCommits(JSON.parse(data)) : null;
+  }
+useEffect(() => {
+  commitView()
+  console.log(commits);
+},[]);
   return (
 
     <ScrollView>
       <VStack style={styles.container}>
 
-        <Text style={styles.h1}>Commit</Text>
+      <Text style={styles.h1}>Commits</Text>
 
 
         <HStack style={styles.commit}>
           <VStack>
             <Center>
               <Text style={styles.h2}>Count</Text>
-              <Text style={styles.number}>32</Text>
+              <Text style={styles.number}>{commits.length}</Text>
             </Center>
           </VStack>
 
           <VStack>
             <Center>
               <Text style={styles.h2}>Average </Text>
-              <Text style={styles.number}>28</Text>
+              <Text style={styles.number}>{commits.length}</Text>
             </Center>
           </VStack>
         </HStack>

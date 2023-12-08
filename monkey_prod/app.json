@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "monkey_log",
-    "slug": "monkey_log",
+    "name": "monkey_prod",
+    "slug": "monkey_prod",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -6,6 +6,7 @@ import Settings from "../screens/settings/Settings";
 import { HStack, Text, Image } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import CustomDrawerContent from "../components/CustonDrawerContent";
 
 
 const { Navigator, Screen } = createDrawerNavigator();
@@ -15,7 +16,13 @@ const AppRoutes = () => {
 
   return (
     <Navigator
+    drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Screen name="Home" component={Home} options={{
+        headerShown:true,
         headerRight: () => (
           <HStack
             style={{
@@ -56,9 +63,7 @@ const AppRoutes = () => {
           backgroundColor: "#0B1416",
         },
         headerTintColor: "white",
-      }}
-    >
-      <Screen name="Home" component={Home} />
+      }}/>
       <Screen name="Profile" component={Profile} />
       <Screen name="Settings" component={Settings} />
     </Navigator>

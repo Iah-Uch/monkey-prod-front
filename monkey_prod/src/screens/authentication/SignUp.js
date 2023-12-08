@@ -5,17 +5,17 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
-  Image,
   ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { VStack, HStack, Text, Center } from "native-base";
+import { VStack, HStack, Text, Center, Image } from "native-base";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { encode, decode } from "js-base64";
 import * as yup from "yup";
 import { Input } from "../../components/InputComponent";
+import { useAuth } from "../../contexts/auth";
 
 if (!global.btoa) {
   global.btoa = encode;
@@ -41,6 +41,8 @@ const signInSchema = yup.object({
 
 const SignUp = () => {
   const { navigate } = useNavigation();
+  const { signIn } = useAuth();
+
 
   const {
     control,
@@ -49,22 +51,22 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(signInSchema),
   });
-  const handleLogin = async (data) => {
-    const { name, email, password, confirm_password } = data;
-    console.log(name);
-    console.log(email);
-    console.log(password);
-    console.log(confirm_password);
-    await AsyncStorage.setItem("@user", email)
-    // Lógica para autenticar o usuário com o email e senha fornecidos
-    // Aqui você pode fazer uma chamada a uma API ou implementar sua própria lógica de autenticação
+  const handleLogin = (data) => {
+    try {
+      signIn(data)
+      // Lógica para autenticar o usuário com o email e senha fornecidos
+      // Aqui você pode fazer uma chamada a uma API ou implementar sua própria lógica de autenticação
+    } catch (error) {
+      console.error(error);
+      // Trate o erro aqui, como mostrar uma mensagem de erro ao usuário
+    }
   };
 
   return (
     <ScrollView style={styles.container}>
-      <VStack >
-        <Text style={styles.h1}>Sign in up </Text>
-        <Text style={styles.h2}>Lorem Ipsum is simply</Text>
+      <VStack marginTop={5}>
+        <Text style={styles.h1}>Sign up </Text>
+        <Image source={require("../../../assets/images/monkey-prod.png")} alt="monkey_prod" w={80} my={3}/>
         <Text style={styles.h3}>If you already have an account register</Text>
         <HStack>
           <Text style={styles.h3}>You can </Text>
