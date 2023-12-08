@@ -13,21 +13,6 @@ const Home = () => {
     <ScrollView>
       <VStack style={styles.container}>
 
-        <HStack style={styles.navBar}>
-          <TouchableOpacity style={styles.report}>
-            <Text style={styles.reportText}>\RepoName</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigate("Profile")}>
-            <Image
-              style={{
-                alignContent: 'flex-end',
-              }}
-              source={require("../../../assets/images/ProfileImage.png")} />
-          </TouchableOpacity>
-
-        </HStack>
-
         <Text style={styles.h1}>Commit</Text>
 
 

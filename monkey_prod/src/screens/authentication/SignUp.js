@@ -1,85 +1,168 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TextInput, Button, TouchableOpacity, Image, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { VStack, HStack, Text, Center } from "native-base";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Controller, useForm } from "react-hook-form";
+import { encode, decode } from "js-base64";
+import * as yup from "yup";
+import { Input } from "../../components/InputComponent";
 
+if (!global.btoa) {
+  global.btoa = encode;
+}
+
+if (!global.atob) {
+  global.atob = decode;
+}
+
+const signInSchema = yup.object({
+  name: yup.string().required("Enter the username"),
+  email: yup.string().required("Enter the email").email("Invalid email"),
+  password: yup
+    .string()
+    .required("Enter the password")
+    .min(8, "Password must be at least 8 digits long"),
+    confirm_password: yup
+    .string()
+    .required("Enter password confirmation")
+    .oneOf([yup.ref('password'), null], 'Passwords must be the same'),
+});
 
 
 const SignUp = () => {
-
   const { navigate } = useNavigation();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(signInSchema),
+  });
+  const handleLogin = async (data) => {
+    const { name, email, password, confirm_password } = data;
+    console.log(name);
+    console.log(email);
+    console.log(password);
+    console.log(confirm_password);
+    await AsyncStorage.setItem("@user", email)
     // Lógica para autenticar o usuário com o email e senha fornecidos
     // Aqui você pode fazer uma chamada a uma API ou implementar sua própria lógica de autenticação
-
-    console.log("Email:", email);
-    console.log("Password:", password);
   };
 
   return (
+    <ScrollView style={styles.container}>
+      <VStack >
+        <Text style={styles.h1}>Sign in up </Text>
+        <Text style={styles.h2}>Lorem Ipsum is simply</Text>
+        <Text style={styles.h3}>If you already have an account register</Text>
+        <HStack>
+          <Text style={styles.h3}>You can </Text>
+          <TouchableOpacity onPress={() => navigate("SignIn")}>
+            <Text style={styles.h3green}> Login here !</Text>
+          </TouchableOpacity>
+        </HStack>
 
-    <VStack style={styles.container}>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="User name"
+              onChangeText={onChange}
+              style={styles.input}
+              secureTextEntr
+              value={value}
+              errorMessage={errors.name?.message}
+              fontFamily="body"
+              returnKeyType="send"
+            />
+          )}
+        />
+       <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Enter email or user name"
+              onChangeText={onChange}
+              style={styles.input}
+              value={value}
+              errorMessage={errors.email?.message}
+              fontFamily="body"
+              returnKeyType="send"
+            />
+          )}
+        />
+                <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Password"
+              style={styles.input}
+              onChangeText={onChange}
+              secureTextEntry
+              value={value}
+              errorMessage={errors.password?.message}
+              fontFamily="body"
+              returnKeyType="send"
+            />
+          )}
+        />
+            <Controller
+          control={control}
+          name="confirm_password"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Confirm Password"
+              style={styles.input}
+              onChangeText={onChange}
+              secureTextEntry
+              value={value}
+              errorMessage={errors.confirm_password?.message}
+              fontFamily="body"
+              returnKeyType="send"
+            />
+          )}
+        />
 
-
-      <Text style={styles.h1}>Sign in to </Text>
-      <Text style={styles.h2}>Lorem Ipsum is simply</Text>
-      <Text style={styles.h3}>If you already have an account register</Text>
-      <HStack>
-        <Text style={styles.h3}>You can </Text>
-        <TouchableOpacity onPress={() => navigate("SignIn")}>
-          <Text style={styles.h3green}> Register here !</Text>
-        </TouchableOpacity>
-      </HStack>
-
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#FFFFFF"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        placeholderTextColor="#FFFFFF"
-        secureTextEntry
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <Text style={styles.h4}>Forgor password ?</Text>
-
-      <Button style={{
-        backgroundColor: "FFFFFF",
-        color: "FFFFFF",
-
-      }} title="Entrar" onPress={handleLogin} />
-      {/* onPress={() => navigate("SignUp")} */}
-      <Text style={styles.h3Center}>or continue with</Text>
-      <Center>
-
-        <TouchableOpacity onPress={() => navigate("Home")}>
-
-        <Image
+        <Button
           style={{
-            marginTop: 25,
+            backgroundColor: "FFFFFF",
+            color: "FFFFFF",
           }}
-          source={require("../../../assets/images/GoogleIcon.png")} />
-        </TouchableOpacity>
-
-      </Center>
-
-
-    </VStack >
+          title="Entrar"
+        onPress={handleSubmit(handleLogin)}
+        />
+        {/* onPress={() => navigate("SignUp")} */}
+        <Text style={styles.h3Center}>or continue with</Text>
+        <Center>
+          <TouchableOpacity onPress={() => navigate("Home")}>
+            <Image
+              style={{
+                marginTop: 25,
+              }}
+              source={require("../../../assets/images/GoogleIcon.png")}
+            />
+          </TouchableOpacity>
+        </Center>
+      </VStack>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: "#0B1416",
@@ -137,7 +220,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 62,
     borderRadius: 10,
-    marginBottom: 12,
     paddingHorizontal: 20,
   },
 
@@ -147,6 +229,5 @@ const styles = StyleSheet.create({
     height: 62,
   },
 });
-
 
 export default SignUp;
