@@ -1,4 +1,7 @@
 # Monkey Prod
+
+Link slides: https://app.pitch.com/app/presentation/e0735a39-c1e7-4a28-9f9a-4116a7c71a2b/3d6d781e-22c4-4ae3-a2a4-69b73ff182ac/cd0a378d-266e-4220-aa83-6ee04e0c03c4
+
 Analytical tool for tracking developer's GitHub commit rate.
 
 ---
